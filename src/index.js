@@ -33,7 +33,7 @@ class Board extends React.Component {
     this.state = {
       //create an array of size 9
       //and fill it with nulls
-      squares: Array(9).fill(null); 
+      squares: Array(9).fill(null) 
     };
   }
 
