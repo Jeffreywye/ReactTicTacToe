@@ -5,29 +5,55 @@ import "./index.css";
 
 
 class Square extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      value: null,
-    };
-  }
+  
+  //Square should not keep track of game/board state
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     value: null,
+  //   };
+  // }
 
 
   render() {
     return (
       <button 
         className="square" 
-        onClick={() => this.setState({value: "X"})}
+        onClick={() => this.props.onClick()}
       >
-        {this.state.value}
+        {this.props.value}
       </button>
     );
   }
 }
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      //create an array of size 9
+      //and fill it with nulls
+      squares: Array(9).fill(null); 
+    };
+  }
+
+  handleClick(i){
+    //make a copy of the array
+    const squares = this.state.squares.slice();
+    //change the value at index i 
+    squares[i] = "X";
+    //set the new array
+    this.setState({squares: squares});
+  }
+
+
   renderSquare(i) {
-    return <Square value={i} />;
+    return (
+      <Square 
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)} 
+      />
+    );
   }
 
   render() {
